@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('homepage') }}"> We Care </a>
+                </div>
+                <ul class="navbar navbar-nav"></ul>
+                <div class="pull-right">
+                    <ul class="navbar navbar-nav">
+                        <li ><a class="active" href="{{ path('view_user_provided_info') }}"><span class="glyphicon glyphicon-saved"></span> Evaluate User Provided Info</a></li>
+                        <li><a href="{{ path('admin_homepage') }}" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+{% endblock %}
+
+
+{% block about %}
+{% endblock %}
+
+{% block main %}
+    <div class = 'container'>
+        <table class = "table table-stripped table-hover">
+            <thead>
+            <tr class = 'info'>
+                <th colspan = "4" class='text-center'>New </th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for info in not_yet %}
+                <tr>
+                    <th class="col-md-2">{{info.username}}</th>
+                    <td>{{info.information}}</td>
+                    <td class='col-sm-1 text-center'><a href="{{path('mark_success', {'user_info_id': info.id, 'user_email': info.username})}}" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> mark as success</a></td>
+                    <td class='col-sm-1 text-center'><a href="{{path('mark_failure', {'user_info_id': info.id})}}" class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span> mark as failure</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <thead>
+            <tr class = 'danger'>
+                <th colspan = "4" class='text-center'>Marked as Failure</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for info in failure %}
+                <tr>
+                    <th>{{info.username}}</th>
+                    <td>{{info.information}}</td>
+                    <td class='col-sm-1 text-center'><a href="{{path('mark_success', {'user_info_id': info.id, 'user_email': info.username})}}" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> mark as success</a></td>
+                    <td class='col-sm-1 text-center'><a href="#" class="btn btn-danger disabled"><span class="glyphicon glyphicon-thumbs-down"></span> mark as failure</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <thead>
+            <tr class = 'success'>
+                <th colspan = "4" class='text-center'>Marked as Success </th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for info in success %}
+                <tr class = "active">
+                    <th class="col-md-1">{{info.username}}</th>
+                    <td>{{info.information}}</td>
+                    <td class='col-sm-1 text-center'><a href="#" class="btn btn-success disabled"><span class="glyphicon glyphicon-thumbs-up"></span> mark as success</a></td>
+                    <td class='col-sm-1 text-center'><a href="{{path('mark_failure', {'user_info_id': info.id})}}" class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span> mark as failure</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

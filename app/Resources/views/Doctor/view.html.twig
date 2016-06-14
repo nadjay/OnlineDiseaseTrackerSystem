@@ -1,0 +1,86 @@
+{# disease/view #}
+
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('homepage') }}"> We Care </a>
+                </div>
+                <ul class="navbar navbar-nav"></ul>
+                <div class="pull-right">
+                    <ul class="navbar navbar-nav">
+                        <li><a class="active" href="{{ path('Find_Doctor') }}"><span class="glyphicon glyphicon-hand-down"></span> find the ideal doctor for your disease </a></li>
+                        <li><a href="{{ path('patient_homepage') }}" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+
+{% block about %}
+{% endblock %}
+
+{% block main %}
+
+    <div class="row ">
+        <div class="well">
+            <h3>Select a disease</h3>
+            <div class="row">
+                <form method="post" action="">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <select name="disease_id" required="required" class="form-control">
+                                <option value selected="selected">Choose a disease</option>
+                                {% for disease in diseases %}
+                                    <option value="{{ disease.id }}" {% if disease.id == disease_id %} selected="selected" {% endif %}>
+                                        {{ disease.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn-primary btn">View</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="well">
+            {% if Doctors is defined %}
+                <table class = "table table-striped">
+                    <thead>
+                    <tr>
+                        <th class = 'text-center'> Name  </th>
+                        <th class = 'text-center'>Specialty </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for doctor in Doctors %}
+                        <tr>
+                            <th class = 'text-center'> {{ doctor.name }} </th>
+                            <td class = 'text-center'> {{ doctor.speciality}} </td>
+                            <td class= 'text-center'><a href="{{path('Find_Hospital', {'doctor_id': doctor.id})}}" class="btn btn-info"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                Please Select a Disease and Continue
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"> We Care </a>
+                </div>
+                <ul class="navbar navbar-nav"></ul>
+                <div class="pull-right">
+                    <ul class="navbar navbar-nav">
+                        <li><a href="{{ path('admin_homepage') }}" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+
+        <div class="col-md-8  col-md-offset-2 panel panel-success " style="max-width: 1000px">
+            <div class="panel-heading"><h4 class="text-left text-success text-uppercase"><span class="glyphicon glyphicon-check"></span> Database Update Successful</h4></div>
+            <div class="panel-body"><h5 class="text-center">You successfully updated the database. To go back to homepage click Okay!!!</h5>
+                <a class=" col-md-2  col-md-offset-2 btn btn-success" href="{{ path('admin_homepage') }}">
+                    Okay
+                    <span class="glyphicon glyphicon-exclamation-sign"></span> </a>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

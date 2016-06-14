@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('homepage') }}"> We Care </a>
+                </div>
+
+                    <ul class="navbar navbar-nav">
+                        <li><a class="active" href="{{ path('user_register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+                    </ul>
+
+            </div>
+        </nav>
+    </header>
+
+{% endblock %}
+
+{% block body_id 'register' %}
+
+{% block main %}
+    {% if form is defined %}
+        {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+        <div class="col-sm-11">
+            <div class="well">
+                {{ form_start(form) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    <hr>
+                    <button type="submit" class="btn btn-primary text-center"> Sign Up</button>
+                    <br>
+                    <br>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% else %}
+    {% endif %}
+    <img class="img img1" src="images/signup.jpg">
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+{% endblock %}

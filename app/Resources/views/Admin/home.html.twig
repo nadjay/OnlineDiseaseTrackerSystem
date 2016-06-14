@@ -1,0 +1,128 @@
+{# Admin/home #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>We Care | Online Disease Tracker System </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #111;
+        }
+
+        li{
+            float: left;
+        }
+
+        li a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            font-family: "Franklin Gothic Book", sans-serif;
+            font-size: larger;
+
+        }
+
+        li a:hover:not(.active){
+            background-color: #111;
+            text-decoration: none;
+        }
+
+        .active{
+            background-color: darkblue;
+            text-decoration: none;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"> We Care </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a class="active" href="{{ path('admin_homepage') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>We Care</h1><h2>Online Disease Tracker System</h2>
+    </div>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="{{ path('new_disease') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> New Disease</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('new_doctor') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> New Doctor</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('add_hospital') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> New Hospital</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('view_user_provided_info') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-search"></span> user Contributions</a>
+        </div>
+    </div>
+</div><br>
+
+<div class="container-fluid bg-3 text-center">
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="{{ path('add_symptoms') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-link"></span> Symptoms to Diseases </a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('select_disease') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-link"></span> Doctors to Disease</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('select_doctor') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-link"></span> Diseases to Doctor </a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('root_disease') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-link"></span> Prerequisites to Diseases </a>
+        </div>
+    </div>
+</div><br><br>
+
+<footer class="container-fluid text-center">
+    <p class="text-danger">**You are logged in as a system administrator.You Should be responsible for every information you update** </p>
+</footer>
+
+</body>
+</html>
+
+
+
+
+

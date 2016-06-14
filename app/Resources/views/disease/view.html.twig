@@ -1,0 +1,71 @@
+{# disease/view #}
+
+{% extends 'base.html.twig' %}
+
+
+{% block about %}
+{% endblock %}
+
+{% block main %}
+
+    <div class="row ">
+        <div class="well">
+            <h5>Select a disease</h5>
+            <div class="row">
+                <form method="post" action="">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <select name="disease_id" required="required" class="form-control">
+                                <option value selected="selected">Choose a disease</option>
+                                {% for disease in diseases %}
+                                    <option value="{{ disease.id }}" {% if disease.id == disease_id %} selected="selected" {% endif %}>
+                                        {{ disease.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn-primary btn">View</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="well">
+            {% if Diseases is defined %}
+                <h1> Disease Information</h1>
+                <table class = "table table-striped">
+                    <thead>
+                    <tr>
+                        <th> Name of the Disease </th>
+                        <th>Gender </th>
+                        <th>Age Group</th>
+                        <th>Severity</th>
+                        <th>Description</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for disease in Diseases %}
+                        <tr>
+                            <td> {{ disease.name }} </td>
+                            <td> {{ disease.gender }} </td>
+                            <td>{{ disease.minimum_age }} - {{ disease.maximum_age }}</td>
+                            <td>{{ disease.severity }}</td>
+                            <td>{{ disease.description }}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+             {% else %}
+                 Please Select a Disease and Continue
+              {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

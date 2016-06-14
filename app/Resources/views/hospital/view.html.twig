@@ -1,0 +1,87 @@
+{# disease/view #}
+
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"> We Care </a>
+                </div>
+                <ul class="navbar navbar-nav"></ul>
+                <div class="pull-right">
+                    <ul class="navbar navbar-nav">
+                        <li><a class="active" href="{{ path('Find_Hospital') }}"><span class="glyphicon glyphicon-hand-down"></span> find the best hospital to meet your doctor </a></li>
+                        <li><a href="{{ path('patient_homepage') }}" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+
+{% block about %}
+{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="well">
+            <h3>Select a doctor</h3>
+            <div class="row">
+                <form method="post" action="">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select name="doctor_id" required="required" class="form-control">
+                                <option value selected="selected">Choose Doctor</option>
+                                {% for doctor in doctors %}
+                                    <option value="{{ doctor.id }}" {% if doctor.id == doctor_id %} selected="selected" {% endif %}>
+                                        {{ doctor.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn-primary btn">View</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+            {% if hospitals is defined %}
+
+                <table class = "table table-striped table-lg table-hover">
+                    <thead>
+                    <tr>
+                        <th class = 'text-center'> Name  </th>
+                        <th colspan = "4" class = 'text-center'>Contact Details </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for hospital in hospitals %}
+                        <tr>
+                            <th class = 'col-md-2 text-left'> {{ hospital.name }} </th>
+                            <td class = 'text-left'> {{ hospital.address}} </td>
+                            <td class = 'text-left'> {{ hospital.telephone }} </td>
+                            <td class = 'text-left'> {{ hospital.email }} </td>
+                            <td class = 'text-left'> {{ hospital.other_details }} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                Please Select a Doctor and Continue
+            {% endif %}
+        
+    </div>
+
+{% endblock %}

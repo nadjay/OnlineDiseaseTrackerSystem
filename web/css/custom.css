@@ -1,0 +1,103 @@
+header{
+
+
+}
+.button{
+    background-color:#1b6d85 ;
+    border: none;
+    color: #1b6d85;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 30px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: relative;
+    top: 60px;
+
+}
+
+.button1 {
+    background-color: #286090;
+    color: white;
+    border: 2px solid #286090;
+}
+
+.button1:hover {
+    background-color: #2aabd2;
+    border: #2aabd2;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+.header img{
+    float: left;
+    width: 1000px;
+    height: 200px;
+    background: #2aabd2;
+
+}
+
+.header button{
+    position: relative;
+    top: 18px;
+    left: 10px;
+}
+
+h1{
+    font-size: 4.5em;
+    font-family: "Franklin Gothic Medium Cond", sans-serif;
+    font-style: normal;
+    font-feature-settings: normal;
+}
+
+img{
+
+}
+
+.img1{
+    display: inline;
+    float: right;
+    height: 200px;
+    width: auto;
+}
+
+form{
+    display: inline;
+
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #111;
+}
+
+li{
+    float: left;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 6px;
+    font-family: "Franklin Gothic Book", sans-serif;
+    font-size: medium;
+
+}
+
+li a:hover:not(.active){
+    background-color: #111;
+    text-decoration: none;
+}
+
+.active{
+    background-color: darkblue;
+    text-decoration: none;
+}
+

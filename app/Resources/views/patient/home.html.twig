@@ -1,0 +1,63 @@
+{# patient/home #}
+
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="navbar navbar-nav">
+                </ul>
+                <div class="pull-right">
+                    <ul class="navbar navbar-nav">
+                        <li><a href="{{ path('medical_profile') }}"><span class="glyphicon glyphicon-edit"></span> Update Profile</a> </li>
+                        <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+{% endblock %}
+
+{% block body_id 'patient_home' %}
+
+
+{% block main %}
+    <div class="container text-center">
+        <h2 class="margin text-nowrap">How can we help you?</h2><br>
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{{ path('enter_symptoms') }}"><h3><span class="glyphicon glyphicon-check"></span> Symptom Checker</h3></a>
+                <p>Enter Your Symptoms and diagnose your disease now</p>
+                <img src=http://www.mayowynnebaxter.co.uk/blog/wp-content/uploads/2015/07/Online-diagnosis.jpg class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('Find_Doctor') }}"><h3><span class="glyphicon glyphicon-search"></span> Find Your Doctor</h3></a>
+                <p>Find the ideal doctor for your disease </p>
+                <br>
+                <img src=http://cdn.trustedpartner.com/images/library/TenetFloridaPhysicianServices2015/Content/iStock_000010649747Small_as_Smart_Object_1_TYUNBLJK_MCPMGYZT.jpg class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('Find_Hospital') }}"><h3><span class=" glyphicon glyphicon-map-marker"></span> Know Where To Go</h3></a>
+                <p>Meet your doctor at the best hospital</p>
+                <br>
+                <img src=http://vignette1.wikia.nocookie.net/zombie/images/1/18/Hospital.jpg/revision/latest?cb=20160329114824 class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('provide_info') }}"><h3><span class="glyphicon glyphicon-share"></span> Contribute</h3></a>
+                <p>You got any valuable information?   Why not share with us?</p>
+                <img src=http://i.marketingprofs.com/assets/images/opinions/marketings-contribution-to-sales-execution-lg.jpg class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+{% endblock %}
