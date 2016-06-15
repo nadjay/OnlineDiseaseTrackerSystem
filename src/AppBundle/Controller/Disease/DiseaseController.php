@@ -114,12 +114,14 @@ class DiseaseController extends Controller
             ->add('doctorID', choiceType::class,['label'=>'Doctors',
                 'choices'=>$doctors,
                 'choice_label'=>function($doctor){
-                    return $doctor->getName();
+                    $var = $doctor->getName()." - ".$doctor->getSpeciality();
+                    return $var;
                 },
                 'data' => $mark,
                 'choices_as_values'=>true,
                 'multiple'=>true,
                 'expanded'=>true,
+
             ])
             ->add('save', submitType::class,['label'=> 'Continue','attr'=>array('class'=>'btn btn-primary')])
             ->getForm();
@@ -171,7 +173,7 @@ class DiseaseController extends Controller
             if ($form->get('addSymptoms')->isClicked()){
                 return $this->redirectToRoute('add_symptoms',array('data_id'=>$disease->getId()));
             }
-            
+
         }
 
         return $this->render('disease/addNew.html.twig', array(

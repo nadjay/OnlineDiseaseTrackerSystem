@@ -40,7 +40,7 @@
                                 <option value selected="selected">Choose Doctor</option>
                                 {% for doctor in doctors %}
                                     <option value="{{ doctor.id }}" {% if doctor.id == doctor_id %} selected="selected" {% endif %}>
-                                        {{ doctor.name }}
+                                        {{ doctor.name }} - {{ doctor.speciality }}
                                     </option>
                                 {% endfor %}
                             </select>

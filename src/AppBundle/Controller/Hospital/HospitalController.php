@@ -25,7 +25,7 @@ class HospitalController extends Controller{
                 ->add('selectADoctor',choiceType::class, [
                     'choices' => $doctors,
                     'choice_label'=> function($doctor){
-                        return $doctor->getName();
+                        return $doctor->getName()." - ".$doctor->getSpeciality();
                     },
                     'choice_attr'=>function($doctor){
                         return ['value' => $doctor->getID()];
@@ -182,7 +182,7 @@ class HospitalController extends Controller{
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
 
-        $statement = $connection->prepare("SELECT doctor.id, doctor.name FROM doctor");
+        $statement = $connection->prepare("SELECT doctor.id, doctor.name, doctor.speciality FROM doctor");
         $statement->execute();
         $doctors=$statement->fetchAll();
 
