@@ -149,6 +149,78 @@ class DiseaseController extends Controller
 
     }
 
+    /**
+     * @Route("/admin/edit disease/{disease_id}", name="edit_disease")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+
+    public function editDiseaseAction(Request $request, $disease_id){
+        $em = $this->getDoctrine()->getManager();
+        $disease =$em->getRepository('AppBundle:Disease')->find($disease_id);
+
+        $form = $this->createForm(DiseaseNew::class, $disease);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $em->persist($disease);
+            $em->flush();
+
+            if ($form->get('finish')->isClicked()){
+                return $this->redirectToRoute("success_message");
+            }
+            if ($form->get('addSymptoms')->isClicked()){
+                return $this->redirectToRoute('add_symptoms',array('data_id'=>$disease->getId()));
+            }
+            
+        }
+
+        return $this->render('disease/addNew.html.twig', array(
+            'form'=> $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/admin/select disease to edit", name="select_disease_to_edit")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+
+    public function selectDiseaseToEditActiom(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $diseases =$em->getRepository('AppBundle:Disease')->findAll();
+
+        $form = $this->createFormBuilder()
+            ->add('selectADisease',choiceType::class, [
+                'choices' => $diseases,
+                'choice_label'=> function($disease){
+                    return $disease->getName();
+                },
+                'choice_attr'=>function($disease){
+                    return ['value' => $disease->getID()];
+                },
+                'choices_as_values'=>true,
+                'placeholder'=>'Choose disease',
+            ])
+            ->add('add', SubmitType::class, ['label'=> 'Continue', 'attr'=>array('class'=>'btn btn-primary')])
+            ->getForm();
+
+        $form -> handleRequest($request);
+
+        if($form -> isValid()){
+            $data= $form->getData();
+            $disease=current($data);
+            $disease_id=$disease->getID();
+
+            if($form->get('add')->isClicked()) {
+                return $this->redirectToRoute('edit_disease', array('disease_id' => $disease_id));
+            }
+        }
+
+        return $this->render('disease/selectToEdit.html.twig', array(
+            'form'=>$form->createView(),
+        ));
+    }
+
 
     
 }

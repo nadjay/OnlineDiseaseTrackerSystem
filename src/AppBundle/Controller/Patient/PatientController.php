@@ -31,7 +31,7 @@ class PatientController extends Controller
      * @Route("/patient/successful", name="success_update")
      */
     public function sucessAction(){
-        return $this->render('message.html.twig', array()
+        return $this->render('patient/message.html.twig', array()
         );
     }
 
@@ -177,7 +177,7 @@ class PatientController extends Controller
 
             }
 
-            return $this->redirectToRoute('success_update');
+            //return $this->redirectToRoute('success_update');
         }
 
 

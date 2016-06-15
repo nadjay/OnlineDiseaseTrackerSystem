@@ -68,6 +68,18 @@ class Disease
 
 
     /**
+     * Set id
+     *
+     * @param integer $id
+     *
+     * @return Disease
+     */
+
+    public function setID($id){
+        $this->id = $id;
+        return $this;
+    }
+    /**
      * Get id
      *
      * @return int

@@ -205,10 +205,11 @@ class SymptomCheckerController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
 
-        $symptom_ids = [];
-        $guess1 = [];
+        $symptom_ids = []; //array containing ids of the entered symptoms
+        $guess1 = [];    //array containing initial guesses of diseases
         $temp = "";
-
+        
+        //get the symptom ids into $symptom_ids array
         for ($i=0; $i < strlen($symptoms); $i++) { 
             $char = substr($symptoms, $i, 1);
             if ($char != ","){
@@ -222,6 +223,7 @@ class SymptomCheckerController extends Controller
         $s_id = intval($temp);
         array_push($symptom_ids, $s_id);
        
+        //creating a view to keep the details of initially guessed diseases
         $query1 = "CREATE OR REPLACE VIEW v AS (";
         $query1 .= "SELECT * FROM disease WHERE disease.id IN (";
         $query1 .= "SELECT DISTINCT dis__symp.disease_id FROM dis__symp ";
@@ -234,7 +236,7 @@ class SymptomCheckerController extends Controller
         $st2->execute();
         $guess1 = $st2->fetchAll();
 
-
+        //get the details the user patient of the session into a view
         $user_id = $this->getUser()->getEmail();
         $query3 = "CREATE OR REPLACE VIEW P AS (";
         $query3 .= "SELECT * FROM patient ";
@@ -248,7 +250,7 @@ class SymptomCheckerController extends Controller
         $st4->execute();
         $user = $st4->fetchAll();
 
-        
+        //get the medical profile of the user into $med_prof[]
         $query6 = 'SELECT disease_id FROM medical_record WHERE patient_id = :id';
         $st6 = $connection->prepare($query6);
         $st6->bindValue('id',$user[0]['id']);
@@ -266,7 +268,7 @@ class SymptomCheckerController extends Controller
         $low_risk = [];
         $not_specified = [];
         
-
+        //remove the gender not matching diseases from the guess1[]
         foreach ($guess1 as $disease) {
             if ($disease['gender'] != 'both' && $disease['gender'] != $user['gender']) {
                 $key = array_search($disease, $guess1);
@@ -274,6 +276,7 @@ class SymptomCheckerController extends Controller
             }
             
         }
+        //get the age of the user
         $queryAge = "SELECT getAge(:email) AS age";
         $stAge=$connection->prepare($queryAge);
         $stAge->bindValue('email', $user_id);
@@ -281,14 +284,17 @@ class SymptomCheckerController extends Controller
         $age= $stAge->fetchAll();
         $user_age=$age[0]['age'];
 
-        $probables = [];
+        $probables = []; //an array to keep final guesses of object type Guess
 
+        //downcast Disease objects to Guess objects
         foreach ($guess1 as $disease){
             $guess = new Guess();
+            $guess->setID($disease['id']);
             $guess->setName($disease['name']);
             $guess->setSeverity($disease['severity']);
             $guess->setDescription($disease['description']);
-            
+
+            //comparing the age group of the disease with the age of the patient
             if ($disease['min_age'] != null && $disease['min_age'] > $user_age) {
                 $dif = $disease['min_age'] - $user_age;
                 if ($dif <= 5){
@@ -314,7 +320,8 @@ class SymptomCheckerController extends Controller
             if ($disease['min_age'] == null && $disease['max_age']==null){
                 array_push($probables,$guess);
             }
-            
+
+            //considering the prerequisites for the disease
             $query5 = "SELECT prereq_id FROM pre_req WHERE disease_id = :id";
             $st5 = $connection->prepare($query5);
             $st5->bindValue('id', $disease['id']);
@@ -326,7 +333,8 @@ class SymptomCheckerController extends Controller
                 }
             }
         }
-        
+
+        // separating final probables into  arrays according to their risk
        foreach ($probables as $disease){
             if ($disease->getSeverity() == 'High') {
                 array_push($high_risk, $disease);
@@ -357,5 +365,5 @@ class SymptomCheckerController extends Controller
 }
 
 class Guess extends Disease{
-    var $prob = 100;
+    var $prob = 98;
 }

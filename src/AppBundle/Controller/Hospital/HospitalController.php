@@ -212,4 +212,14 @@ class HospitalController extends Controller{
         
 
     }
+
+    /**
+     * @Route("/admin/add hospitals to doctors", name="hospitals_to_doctors")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function hospitalsToDoctorsAction(){
+        return $this->redirectToRoute('add_hospital');
+    }
+
+    
 }

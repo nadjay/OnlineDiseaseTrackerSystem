@@ -2,11 +2,11 @@
 
 {% block header %}
 
-    <header>
+    <header xmlns="http://www.w3.org/1999/html">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('homepage') }}"> We Care </a>
+                    <li><a> We Care </a></li>
                 </div>
 
                 <ul class="navbar navbar-nav"></ul>
@@ -14,6 +14,7 @@
                 <div class="pull-right">
                     <ul class="navbar navbar-nav">
                         <li><a class="active" href="{{ path('medical_profile') }}"><span class="glyphicon glyphicon-pencil"></span> Update Medical Profile</a></li>
+                        <li><a href="{{ path('patient_homepage') }}" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                     </ul>
                 </div>
@@ -27,6 +28,13 @@
 
 {% block main %}
     {% if form is defined %}
+        <div>
+            <h3 class="text-center text-info" title="hint!" data-toggle="popover" data-trigger="hover" data-placement="bottom"
+                data-content="tick the diseases you recently suffered from or currently suffering form">
+                Update Your Medical Profile
+            </h3>
+            <hr>
+        </div>
         {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
         <div class="col-sm-11">
             <div class="well">
@@ -35,16 +43,23 @@
                 {{ form_end(form) }}
 
             </div>
+            <div class="alert alert-warning">
+                <strong>Make sure to keep your medical profile up-to-date to get more accurate results from the symptom checker!</strong>
+            </div>
+
         </div>
     {% else %}
     {% endif %}
-
-
 
 {% endblock %}
 
 
 
 {% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 
 {% endblock %}
