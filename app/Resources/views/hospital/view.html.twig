@@ -70,10 +70,10 @@
                     {% for hospital in hospitals %}
                         <tr>
                             <th class = 'col-md-2 text-left'> {{ hospital.name }} </th>
-                            <td class = 'text-left'> {{ hospital.address}} </td>
-                            <td class = 'text-left'> {{ hospital.telephone }} </td>
-                            <td class = 'text-left'> {{ hospital.email }} </td>
-                            <td class = 'text-left'> {{ hospital.other_details }} </td>
+                            <td class = 'col-md-2 text-left'> {{ hospital.address}} </td>
+                            <td class = 'col-md-2 text-left'> {{ hospital.telephone }} </td>
+                            <td class = 'col-md-2 text-left'> {{ hospital.email }} </td>
+                            <td class = 'col-md-2 text-left'> {{ hospital.other_details }} </td>
                         </tr>
                     {% endfor %}
                     </tbody>

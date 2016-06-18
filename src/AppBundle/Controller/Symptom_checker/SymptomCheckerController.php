@@ -76,7 +76,7 @@ class SymptomCheckerController extends Controller
                 'placeholder'=>'symptom 5',
                 'required'=>false,
             ])
-            ->add('go', submitType::class, ['label'=>'Go', 'attr'=>array('class'=>'btn btn-primary')])
+            ->add('go', submitType::class, ['label'=>'Go', 'attr'=>array('class'=>'btn btn-primary', 'style'=>'float-left')])
             ->add('more',submitType::class,['label'=>'+add more symptoms', 'attr'=>array('class'=>'btn btn-primary')])
             ->getForm();
         
@@ -205,8 +205,8 @@ class SymptomCheckerController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
 
-        $symptom_ids = []; //array containing ids of the entered symptoms
-        $guess1 = [];    //array containing initial guesses of diseases
+        $symptom_ids = []; //array to keep ids of the entered symptoms
+        $guess1 = [];    //array to keep initial guesses of diseases
         $temp = "";
         
         //get the symptom ids into $symptom_ids array

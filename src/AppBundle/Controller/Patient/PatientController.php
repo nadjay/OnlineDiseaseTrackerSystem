@@ -92,7 +92,7 @@ class PatientController extends Controller
         $patient = new Patient();
 
         $form = $this->createFormBuilder($patient)
-            ->add('email', TextType::class, array('data'=>$email, 'disabled'=>true))
+            ->add('email', TextType::class, array('data'=>$email))
             ->add('name', TextType::class)
             ->add('gender', ChoiceType::class,
                 ['choices'=>['Male' => 'Male', 'Female' => 'Female'], 'choices_as_values' => true, 'placeholder' =>'-SELECT-'])

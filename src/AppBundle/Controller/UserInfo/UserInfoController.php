@@ -30,7 +30,7 @@ class UserInfoController extends Controller
         $form = $this->createFormBuilder($user_info)
             ->add('username', TextType::class,['label'=>'user email', 'data'=>$email])
             ->add('information',TextareaType::class,['label'=>'Information'])
-            ->add('state',TextType::class, ['label'=> 'state', 'data'=>'not yet evaluated', 'disabled'=>true,])
+            ->add('state',TextType::class, ['label'=> 'state', 'data'=>'not yet evaluated',])
             ->add('save',submitType::class, ['label'=>'Submit', 'attr'=>array('class'=>'btn btn-primary')])
             ->getForm();
 
@@ -58,7 +58,7 @@ class UserInfoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
 
-        $query1 = "SELECT * FROM user__info WHERE user__info.state = 'not yet evaluated' ORDER BY user__info.id DESC";
+        $query1 = "SELECT * FROM user__info WHERE user__info.state ='not yet evaluated' ORDER BY user__info.id DESC";
         $query2 = "SELECT * FROM user__info WHERE user__info.state = 'successful' ORDER BY user__info.id DESC";
         $query3 = "SELECT * FROM user__info WHERE user__info.state = 'failure' ORDER BY user__info.id DESC";
         
